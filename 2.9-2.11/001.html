@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="dataDiv">
+        <h1 style="color: brown;">夜莺的todolist~</h1>
+        <div class="iptDiv">
+            <input type="text" placeholder="请输入待办事项" id="ipt">
+            <button onclick="add()" class="yes">确定</button>
+        </div>
+        <div class="listDiv">
+            <ul>
+                <li class="u">
+                    <span contenteditable="true">今天也要学习哦</span>
+                    <button class="close">删除</button>
+                    <button class="over">完成</button>
+                </li>
+            </ul>
+        </div>
+        <div class="ps">ps:点击待办事项文字即可修改
+            <br>点击‘完成’修改待办事项完成与否，完成背景颜色即为灰色
+            <br>点击‘删除’即可删除待办事项
+        </div>
+    </div>
+
+
+    <script>
+        // 增加
+        function add() {
+            let ipt = document.getElementById('ipt').value;
+            let listDiv = document.querySelector('.listDiv');
+            let str = `<li>
+                <span  contenteditable="true">${ipt}</span>
+                <button class="close">删除</button>
+                <button class="over">完成</button>
+            </li>`;
+            document.querySelector("ul").innerHTML = document.querySelector("ul").innerHTML + str;
+            document.getElementById('ipt').value = '';
+            var all = document.getElementsByClassName('close');
+            for (var i = 0; i < all.length; i++) {
+                all[i].onclick = function() {
+                    this.parentElement.style.display = "none";
+                }
+            }
+
+        }
+        // 修改
+        var change = document.querySelector('ul');
+        change.addEventListener("click", function(event) {
+            if (event.target.className == "over") {
+                event.target.parentElement.classList.toggle("u");
+            }
+        })
+
+        // 删除
+        var all = document.getElementsByClassName('close');
+        for (var i = 0; i < all.length; i++) {
+            all[i].onclick = function() {
+                this.parentElement.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
